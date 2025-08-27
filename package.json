@@ -1,18 +1,24 @@
 {
   "name": "groq-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Serverless Groq API proxy for Vercel",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "dev": "vercel dev",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "groq",
+    "api",
+    "vercel",
+    "serverless"
+  ],
+  "author": "NØBIEZ",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "dotenv": "^17.2.1",
-    "express": "^5.1.0",
+    "dotenv": "^16.4.5",
     "node-fetch": "^3.3.2"
   }
 }
