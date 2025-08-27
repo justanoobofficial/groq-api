@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Groq API Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #111;
+      color: #eee;
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px;
+    }
+    #response {
+      margin-top: 20px;
+      padding: 15px;
+      background: #222;
+      border-radius: 8px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>⚡ Groq API Test</h1>
+  <input type="text" id="prompt" placeholder="Enter your prompt..." size="40">
+  <button onclick="sendPrompt()">Send</button>
+
+  <div id="response">Response will appear here...</div>
+
+  <script>
+    async function sendPrompt() {
+      const prompt = document.getElementById("prompt").value;
+      const responseDiv = document.getElementById("response");
+      responseDiv.textContent = "⏳ Loading...";
+
+      try {
+        const res = await fetch("/api/groq", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt })
+        });
+
+        const data = await res.json();
+
+        if (data.error) {
+          responseDiv.textContent = "❌ Error: " + data.error;
+        } else {
+          responseDiv.textContent = "✅ " + data.choices[0].message.content;
+        }
+      } catch (err) {
+        responseDiv.textContent = "⚠️ Request failed: " + err.message;
+      }
+    }
+  </script>
+</body>
+</html>
